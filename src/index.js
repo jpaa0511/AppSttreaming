@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const {engine} = require('express-handlebars');
 const path = require('path');
+const pool = require('./database');
 
 //inicializaciones
 const app = express();
@@ -27,11 +28,21 @@ app.use((req, res, next)=>{
     next();
 });
 
+/* Prueba de conexion api postman
+app.get('/api/plataforma', (req,res) =>{
+    pool.query('SELECT * FROM plataforma', (error,filas)=>{
+        if(error){
+            throw error;
+        }else{
+            res.send(filas);
+        }
+    });
+});*/
 
 //rutas
 app.use(require('./routes/'));
 app.use(require('./routes/authentication'));
-app.use('/links', require ('./routes/links'));
+app.use('/Plataformas', require ('./routes/Plataformas'));
 
 
 //public
