@@ -1,0 +1,28 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card ">
+                <div class="card-body">
+                    <form action="/Plataformas/editar/{{plataforma.IdPlataforma}}" method="post">
+                        <div class="mb-3">
+                            <input value="{{plataforma.Imagen_URL}}" class="form-control" type="url" name="Imagen_URL" placeholder="URL de la imagen">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" value="{{plataforma.Titulo}}" class="form-control" name="Titulo" placeholder="Titulo de la plataforma">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="6" name="Descripcion"
+                                placeholder="Descripcion de la plataforma">{{plataforma.Descripcion}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input value="{{plataforma.Precio}}" type="number" class="form-control" name="Precio" placeholder="Precio de la plataforma">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

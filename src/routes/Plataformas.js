@@ -30,4 +30,23 @@ router.get('/delete/:IdPlataforma', async (req,res)=>{
     res.redirect('/Plataformas');
 });
 
+router.get('/editar/:IdPlataforma', async (req,res)=>{
+    const {IdPlataforma} = req.params;
+    const plataformas = await pool.query('SELECT * FROM plataforma WHERE IdPlataforma = ?', [IdPlataforma]);
+    res.render('Plataformas/editar', {plataforma: plataformas[0]})
+});
+
+router.post('/editar/:IdPlataforma', async (req,res)=>{
+    const {IdPlataforma} = req.params;
+    const {Imagen_URL, Titulo, Descripcion, Precio} = req.body;
+    const newPlataforma = {
+        Imagen_URL, 
+        Titulo, 
+        Descripcion, 
+        Precio
+    };
+    await pool.query('UPDATE plataforma set ? WHERE IdPlataforma = ?', [newPlataforma, IdPlataforma]);
+    res.redirect('/Plataformas');
+});
+
 module.exports = router;
