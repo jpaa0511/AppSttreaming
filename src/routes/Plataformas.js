@@ -7,11 +7,6 @@ router.get('/add', (req, res)=>{
     res.render('Plataformas/add')
 });
 
-router.get('/', async (req, res) =>{
-    const plataform = await pool.query('SELECT * FROM plataforma');
-    res.render('Plataformas/lista', {Plataformas});
-});
-
 router.post('/add', async (req, res)=> {
     const {Imagen_URL, Titulo, Descripcion, Precio} = req.body;
     const newPlataforma = {
@@ -21,7 +16,18 @@ router.post('/add', async (req, res)=> {
         Precio
     };
     await pool.query('INSERT INTO plataforma set ?', [newPlataforma]);
-    res.send('recivido prr')
+    res.redirect('/Plataformas');
+});
+
+router.get('/', async (req, res) =>{
+    const plataform = await pool.query('SELECT * FROM plataforma');
+    res.render('Plataformas/lista', {plataform});
+});
+
+router.get('/delete/:IdPlataforma', async (req,res)=>{
+    const {IdPlataforma} = req.params;
+    await pool.query('DELETE FROM plataforma WHERE IdPlataforma = ?', [IdPlataforma]);
+    res.redirect('/Plataformas');
 });
 
 module.exports = router;
