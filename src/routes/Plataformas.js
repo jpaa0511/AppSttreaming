@@ -24,5 +24,10 @@ router.get('/', async (req, res) =>{
     res.render('Plataformas/lista', {plataform});
 });
 
+router.get('/delete/:IdPlataforma', async (req,res)=>{
+    const {IdPlataforma} = req.params;
+    await pool.query('DELETE FROM plataforma WHERE IdPlataforma = ?', [IdPlataforma]);
+    res.redirect('/Plataformas');
+});
 
 module.exports = router;

@@ -6,5 +6,4 @@ module.exports= {
         password: 'root123',
         database: 'streamingcolombia'
     }
-
 }

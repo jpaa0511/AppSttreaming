@@ -9,11 +9,18 @@
                         {{Titulo}}
                     </h3>
                     <p class="m-2">{{Descripcion}}</p>
-                    <a href="" class="btn btn-danger">Eliminar plataforma</a>
-                    <a href="" class="btn btn-secondary">Editar</a>
+                    <a href="/Plataformas/delete/{{IdPlataforma}}" class="btn btn-danger">Eliminar plataforma</a>
+                    <a href="/Plataformas/editar/{{IdPlataforma}}" class="btn btn-secondary">Editar</a>
                 </div>
             </div>
         </div>
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>No hay plataformas disponibles</p>
+                    <a href="/Plataformas/add">¡Agrega una plataforma!</a>
+                </div>
+            </div>
         {{/each}}
     </div>
 </div>
