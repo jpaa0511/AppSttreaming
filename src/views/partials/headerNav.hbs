@@ -1,20 +1,50 @@
+{{#if user}}
 <header class="p-3 bg-primary">
-    <div class="container-fluid">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" class="nav-link px-2 text-white">Inicio</a></li>
-          <li><a href="#irPlataforma" class="nav-link px-2 text-white">Plataformas</a></li>
-          <li><a href="#nosotros" class="nav-link px-2 text-white">Nosotros</a></li>
-        </ul>
+        <li><a href="/" class="btn btn-primary px-2 text-white">Inicio</a></li>
 
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Ingresar</button>
-          <button type="button" class="btn btn-light">Registrarme</button>
+        <div class="btn-group">
+            <a href="#irPlataforma"><button class="btn btn-primary text-white" type="button">Plataformas</button></a>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+            data-bs-toggle="dropdown" aria-expanded="false">
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="plataformas/add">Agregar plataforma</a></li>
+          </ul>
         </div>
+
+        <li><a href="#nosotros" class="btn btn-primary px-2 text-white">Nosotros</a></li>
+      </ul>
+
+      <div class="text-end">
+        <a href="/profile" class="btn btn-outline-light me-2">Perfil</a>
+        <a href="/logout" class="btn btn-light me-2">Cerrar sesion</a>
       </div>
     </div>
-  </header>
+  </div>
+</header>
+{{else}}
+
+<header class="p-3 bg-primary">
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+        <li><a href="/" class="btn btn-primary px-2 text-white">Inicio</a></li>
+
+        <li><a href="#irPlataforma" class="btn btn-primary px-2 text-white">Plataformas</a></li>
+
+        <li><a href="#nosotros" class="btn btn-primary px-2 text-white">Nosotros</a></li>
+      </ul>
+
+      <div class="text-end">
+        <a href="/signin" class="btn btn-outline-light me-2">Iniciar sesion</a>
+        <a href="/signup" class="btn btn-light me-2">Registrarme</a>
+      </div>
+    </div>
+  </div>
+</header>
+{{/if}}

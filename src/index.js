@@ -3,9 +3,16 @@ const morgan = require('morgan');
 const {engine} = require('express-handlebars');
 const path = require('path');
 const pool = require('./database');
+const flash = require('connect-flash');
+const session = require('express-session');
+const mysqlstore = require('express-mysql-session');
+const { database } = require('./keys');
+const passport = require('passport');
+
 
 //inicializaciones
 const app = express();
+require('./lib/passport');
 
 //configuraciones
 app.set('views', path.join(__dirname, 'views'));
@@ -19,25 +26,28 @@ app.engine('.hbs', engine({
 app.set('view engine', '.hbs');
 
 // middlewares
+app.use(session({
+    secret: 'jpaa0511',
+    resave: false,
+    saveUninitialized: false,
+    store: new mysqlstore(database)
+}));
+app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //variable globales
 app.use((req, res, next)=>{
+    app.locals.exitoso = req.flash('exitoso');
+    app.locals.mensaje = req.flash('mensaje');
+    app.locals.user = req.user;
     next();
 });
 
-/* Prueba de conexion api postman
-app.get('/api/plataforma', (req,res) =>{
-    pool.query('SELECT * FROM plataforma', (error,filas)=>{
-        if(error){
-            throw error;
-        }else{
-            res.send(filas);
-        }
-    });
-});*/
 
 //rutas
 app.use(require('./routes/'));
