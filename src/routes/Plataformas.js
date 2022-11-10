@@ -35,7 +35,6 @@ router.get('/delete/:IdPlataforma', async (req,res)=>{
 router.get('/editar/:IdPlataforma', async (req,res)=>{
     const {IdPlataforma} = req.params;
     const plataformas = await pool.query('SELECT * FROM plataforma WHERE IdPlataforma = ?', [IdPlataforma]);
-    
     res.render('Plataformas/editar', {plataforma: plataformas[0]})
 });
 
